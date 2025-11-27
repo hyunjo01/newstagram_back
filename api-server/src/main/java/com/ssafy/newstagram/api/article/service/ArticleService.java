@@ -1,14 +1,12 @@
 package com.ssafy.newstagram.api.article.service;
 
 import com.ssafy.newstagram.api.article.dto.ArticleDto;
-import com.ssafy.newstagram.api.article.entity.Article;
 import com.ssafy.newstagram.api.article.repository.ArticleRepository;
+import com.ssafy.newstagram.domain.news.entity.Article;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 
 @Service
@@ -35,13 +33,32 @@ public class ArticleService {
                 .orElseThrow(() -> new RuntimeException("Article not found"));
 
         // 3) DTO 변환
-        ArticleDto dto = article.toArticleDto();
+        ArticleDto dto = toArticleDto(article);
 
         // 4) Redis 저장 (TTL 예: 1시간)
         redisTemplate.opsForValue().set(ArticleDtoKey, dto);
 
         return dto;
     }
+
+    public ArticleDto toArticleDto(Article article) {
+
+        return ArticleDto.builder()
+                .id(article.getId())
+                .title(article.getTitle())
+                .content(article.getContent())
+                .description(article.getDescription())
+                .url(article.getUrl())
+                .thumbnailUrl(article.getThumbnailUrl())
+                .author(article.getAuthor())
+                .publishedAt(article.getPublishedAt())
+                .createAt(article.getCreatedAt())
+                .updateAt(article.getUpdatedAt())
+                .category(article.getCategory())
+                .build();
+
+    }
+
 
 }
 
