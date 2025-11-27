@@ -35,7 +35,7 @@ public class ArticleService {
         // 3) DTO 변환
         ArticleDto dto = toArticleDto(article);
 
-        // 4) Redis 저장 (TTL 예: 1시간)
+        // 4) Redis 저장
         redisTemplate.opsForValue().set(ArticleDtoKey, dto);
 
         return dto;
@@ -51,10 +51,10 @@ public class ArticleService {
                 .url(article.getUrl())
                 .thumbnailUrl(article.getThumbnailUrl())
                 .author(article.getAuthor())
-                .publishedAt(article.getPublishedAt())
-                .createAt(article.getCreatedAt())
-                .updateAt(article.getUpdatedAt())
-                .category(article.getCategory())
+//                .publishedAt(article.getPublishedAt())
+//                .createAt(article.getCreatedAt())
+//                .updateAt(article.getUpdatedAt())
+//                .category(article.getCategory())
                 .build();
 
     }

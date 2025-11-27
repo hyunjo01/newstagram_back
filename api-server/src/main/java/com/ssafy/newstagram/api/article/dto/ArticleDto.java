@@ -29,9 +29,9 @@ public class ArticleDto {
     private String url;
     private String thumbnailUrl;
     private String author;
-    private LocalDateTime publishedAt;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-    private NewsCategory category;
+//    private LocalDateTime publishedAt;
+//    private LocalDateTime createAt;
+//    private LocalDateTime updateAt;
+//    private NewsCategory category;
 
 }
